@@ -22,13 +22,16 @@ const clerkWebhooks = async (req, res) => {
         const userData = {
             _id: data.id,
             email: data.email_addresses[0].email_address, // yahan theek kiya
-            username: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
-            image: data.image_url
+            username:
+                `${data.first_name || ''} ${data.last_name || ''}`.trim()
+                || "User",
+           image: data.image_url || "https://via.placeholder.com/150",
         };
 
         //switch cases for different events
         switch (type) {
             case "user.created": {
+                console.log("USER DATA:", userData);
                 await User.create(userData);
                 break;
             }
@@ -43,11 +46,11 @@ const clerkWebhooks = async (req, res) => {
             default:
                 break;
         }
-        res.json({success: true, message: "WebHook received"})
+        res.json({ success: true, message: "WebHook received" })
 
     } catch (error) { // err ki jaga error
         console.log(error.message)
-        res.status(400).json({success: false, message: error.message});
+        res.status(400).json({ success: false, message: error.message });
     }
 }
 
