@@ -19,7 +19,13 @@ const clerkWebhooks = async (req, res) => {
         // Getting Data from request body
         const { data, type } = req.body;
 
-        const userData = {
+    
+
+        //switch cases for different events
+        switch (type) {
+            case "user.created": {
+
+                    const userData = {
             _id: data.id,
             email: data.email_addresses[0].email_address, // yahan theek kiya
             username:
@@ -27,15 +33,18 @@ const clerkWebhooks = async (req, res) => {
                 || "User",
            image: data.image_url || "https://via.placeholder.com/150",
         };
-
-        //switch cases for different events
-        switch (type) {
-            case "user.created": {
-                console.log("USER DATA:", userData);
                 await User.create(userData);
                 break;
             }
             case "user.updated": {
+                    const userData = {
+            _id: data.id,
+            email: data.email_addresses[0].email_address, // yahan theek kiya
+            username:
+                `${data.first_name || ''} ${data.last_name || ''}`.trim()
+                || "User",
+           image: data.image_url || "https://via.placeholder.com/150",
+        };
                 await User.findByIdAndUpdate(data.id, userData);
                 break;
             }

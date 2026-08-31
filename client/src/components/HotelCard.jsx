@@ -11,7 +11,7 @@ const HotelCard = ({ room, index }) => {
         >
             <img
                 src={room.images[0]}
-                alt="" />
+                alt=""  className="w-full h-48 object-cover" />
 
             {index % 2 === 0 && (
                 <p className="px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full">
@@ -34,7 +34,7 @@ const HotelCard = ({ room, index }) => {
                     </div>
                 </div>
 
-                <div>
+                <div className="flex items-center gap-1 mt-2">
                     <img
                         src={assets.locationIcon}
                         alt="location-icon"
