@@ -9,12 +9,15 @@ import hotelRouter from "./routes/hotelRoutes.js";
 import connectCloudinary from "./config/cloudinary.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
+import { stripeWebhooks } from "./controller/stripewebhooks.js";
 
 connectDb() ;
 connectCloudinary();
 const app= express();
 
 app.use(cors());  //enable cors origin resource sharing
+//api to listen to web hook 
+app.post('/api/stripe', express.raw({type: "application/json"}),stripeWebhooks);
 // middleware 
 app.use(express.json())
 app.use(clerkMiddleware())
