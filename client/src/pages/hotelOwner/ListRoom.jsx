@@ -89,7 +89,7 @@ useEffect(()=>{
                     </thead>
                     <tbody className='text-sm'>
                         {
-                            rooms.map((item, index) => (
+                          rooms.map((item, index) => (
                                 <tr key={index}>
                                     <td className='py-3 px-4 text-gray-700 border-t border-gray-300'>
                                         {item.roomType}

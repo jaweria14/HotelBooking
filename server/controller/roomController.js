@@ -86,7 +86,7 @@ export const getOwnerRooms = async (req, res) => {
 
 }
 
-// apii to create a new room
+// apii to check the room availabity 
 
 export const toggleRoomAvailability = async (req, res) => {
   try {
